@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <div style="max-width: 400px;">
+                    <h3>{{product.title}}</h3>
+                    <p>{{product.description |truncatechars:150}}</p>
+                    <p><b>Price:</b>{{product.price}}</p>
+                    <a href="{% url "product:detail_product" product.slug %}"><input type="button" value="Show details"></a>
+                    <hr>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock body %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  {% load static %}
+    <head>
+    <title>Título da página</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+  <body>
+    <header>
+        <nav style="display: flex;, flex-direction: row; justify-content: space-between; background: gray; color: #fff;">
+            <h1><a href="{% url "product:list_product" %}">ecommerce</a></h1>
+            <form action="product:search">
+              <label>search: <input type="text"></label>
+              <input type="submit" value="search">
+            </form>
+              <ul style="display: flex;, flex-direction: row; list-style: none;">
+              {% if user.is_authenticated %}
+                <li style="margin:5px; "><a href="{% url "cart:read_cart" %}" style="color: #fff; text-decoration: none;">cart</a></li>
+                <li style="margin:5px;"><a href="{% url "store:read_my_store" %}" style="color: #fff; text-decoration: none;">my store</a></li>
+                <li style="margin:5px;"><a href="{% url "account:read" %}" style="color: #fff; text-decoration: none;">Account</a></li>
+                <li style="margin:5px;"><a href="{% url "account:logout" %}" style="color: #fff; text-decoration: none;">logout</a></li>
+              {% else %}
+                <li style="margin:5px; "><a href="{% url "account:login" %}" style="color: #fff; text-decoration: none;">login</a></li>
+              {% endif %} 
+              </ul>
+        </nav>
+    </header>
+    {% block body %}
+      {% load crispy_forms_tags %}
+    {% endblock body %}
+  </body>
+</html>

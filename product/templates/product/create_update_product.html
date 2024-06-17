@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block body %}
+<form action='' method="POST"> 
+    {% load crispy_forms_tags %}
+    {% csrf_token %}
+    <h2>create Product</h2>
+      {{form |crispy}}
+      <input type="submit" |crispy>
+      {% if slug %}
+        <p><a href="{% url 'product:create_variation' slug %}">Add Variations</a></p>
+        <p><a href="{% url 'product:detail_product' slug %}">see detail</a></p>
+      {% endif %}
+</form>
+{% endblock body %}

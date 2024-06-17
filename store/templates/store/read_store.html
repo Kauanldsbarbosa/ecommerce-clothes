@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body %}
+<ul>
+    <h3>Products</h3>
+    {% if products %}
+    {% for product in products %}
+        <li>
+            <div style="max-width: 400px;">
+                <h3>{{product.title}}</h3>
+                <p>{{product.description |truncatechars:150}}</p>
+                <p><b>Price:</b>{{product.price}}</p>
+                <a href="{% url "product:detail_product" product.slug %}"><input type="button" value="Show details"></a>
+                <hr>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>the store no has products</p>
+{% if add_products_enabled %}
+    <a href="{% url "product:create_product" store.slug %}">add products</a>
+{% endif %}
+{% endif %}
+{% endblock body %}

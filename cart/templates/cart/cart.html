@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% if cart_items %}
+<table>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>description</th>
+      <th>price</th>
+      <th>promotional price</th>
+      <th>color</th>
+      <th>amount</th>
+      <th>select</th>
+      <th style='color: red;'><b>remove</b></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cart_items %}
+        <tr>
+          <td>{{item.product.size}} </td>
+          <td>{{item.product.color}}</td>
+          <td>{{item.product.price}}</td>
+          <td>{{item.product.promotional_price}}</td>
+          <td>{{item.product.color}}</td>
+          <td><input type="number" value="{{item.amount}}"></td>
+          {% if item.selected %}
+          <td><input type="checkbox" checked></td>
+          {% else %}
+          <td><input type="checkbox"></td>
+          {% endif %}
+          <td><a href="{% url "cart:remove_to_cart" item.slug %}">remove<a></td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<input type='submit' value="finalize purchase">
+{% else %}
+<h3>you have no products in your cart :(</h3>
+{% endif %}
+{% endblock body %}

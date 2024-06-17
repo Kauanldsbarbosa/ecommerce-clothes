@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block body %}
+<form action='' method="POST"> 
+    <h3><b>Product</b></h3>
+    <table>
+        <thead>
+          <tr>
+            <th>title</th>
+            <th>description</th>
+            <th>price</th>
+            <th>promotional price</th>
+            <th>store</th>
+            <th>edit</th>
+            <th>see</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{product.title}} </td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.promotional_price}}</td>
+            <td>{{product.store}}</td>
+            <td><a href="{% url "product:update_product" product.slug %}">Edit</a></td>
+            <td><a href="{% url 'product:detail_product' product.slug %}">see</a></td>
+          </tr>
+        </tbody>
+      </table>
+    <hr>
+    {% load crispy_forms_tags %}
+    {% csrf_token %}
+    {{form |crispy}}
+    <hr>
+    <input type="submit" |crispy>
+</form>
+<h3><b>variations</b></h3>
+<table>
+    <thead>
+      <tr>
+        <th>title</th>
+        <th>description</th>
+        <th>price</th>
+        <th>promotional price</th>
+        <th>color</th>
+        <th>Edit</th>
+        <th style='color: red;'><b>Delete</b></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for variation in product_variations %}
+          <tr>
+            <td>{{variation.size}} </td>
+            <td>{{variation.color}}</td>
+            <td>{{variation.price}}</td>
+            <td>{{variation.promotional_price}}</td>
+            <td>{{variation.color}}</td>
+            <td><a href="{% url "product:update_variation" variation.slug %}">Edit</a></td>
+            <td><a href="{% url "product:delete_variation" variation.slug %}">Delete</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock body %}

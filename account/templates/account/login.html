@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Login</h1>
+<form action='' method="POST"> 
+    {% csrf_token %}
+    <label><b>Email:</b> <input type="email" id="email" name="email"></label><br>
+    <p></p>
+    <label><b>Password:</b> <input type="password" id="password" name="password"></label><br>
+    <hr>
+    <input type="submit" value='login'>
+</form>
+<p>If you don't have an account, <a href="{% url "account:create" %}">create one now!</a></p>
+{% if messages %}
+    <hr>
+    <ul>
+        {% for message in messages %}
+            <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>
+                {{ message.message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock body %}

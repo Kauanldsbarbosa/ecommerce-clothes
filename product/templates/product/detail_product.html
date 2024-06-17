@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>{{product.title}}</h2>
+    <ul>
+        <li>
+            <div style="max-width: 50vw;">
+                <h3><p>{{product.title |truncatechars:150}}</p></h3>
+                <p><b>Description:</b> {{product.description |truncatechars:150}}</p>
+                <p><b>Price:</b> {{product.price}}</p>
+                <p><b>promotion:</b> {{product.promotional_price}}</p>
+                <p><b>store:</b> {{product.store}}</p>
+                {% if enable_edit %}
+                    <p style='color:blue;'><a href='{% url "product:update_product" product.slug %}'>Edit</a></p>
+                {% endif %}
+                <hr>
+                <p><b>sizes:</b>
+                {% for variation in variations %}
+                    <p>{{variation.size}} ({{variation.stock}}) ({{variation.color}}) <a href='{% url "cart:add_to_cart" variation.slug %}'> add to cart</a></p>
+                {% endfor %}
+                </select>
+                {% if enable_edit %}
+                    <p style='color:blue;'><a href='{% url "product:create_variation" product.slug %}'>add variations</a></p>
+                {% endif %}
+                </p>
+            </div>
+        </li>
+    </ul>
+{% endblock body %}

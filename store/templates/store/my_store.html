@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+    <h2>My stores</h2>
+    {% if stores %}
+    <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>description</th>
+            <th>see</th>
+            <th>Edit</th>
+            <th style='color: red;'><b>Delete</b></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for store in stores %}
+              <tr>
+                <td>{{store.name}} </td>
+                <td>{{store.description}}</td>
+                <td><a href='{% url "store:read_store" store.slug %}'>see</a></td>
+                <td><a href='{% url "store:update" store.slug %}'>edit</a></td>
+                <td><a href='{% url "store:delete" store.slug %}'>exclude</a></td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>you no have a store. create <a href='{% url "store:create"%}'>store</a></p>
+      {% endif %}
+{% endblock body %}

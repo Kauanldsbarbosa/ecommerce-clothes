@@ -1,0 +1,3 @@
+from .cud_product import CreateProductView, UpdateProductView, delete_product_view
+from .cud_product_variation import CreateProductVariationView, UpdateProductVariationView,  DeleteProductVariationView
+from .read_product import ListProductView, DetailProductView

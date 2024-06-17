@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>Olá, {{user_account.first_name}}!</h1>
+<hr>
+<h2>Aqui estão seus dados:</h2>
+<hr>
+<p><b>username:</b> {{user_account.username}}</p>
+<p><b>first name:</b> {{user_account.first_name}}</p>
+<p><b>last name:</b> {{user_account.last_name}}</p>
+<p><b>CPF:</b> {{user_account.cpf}}</p>
+<p><b>date of birth:</b> {{user_account.date_of_birth}}</p>
+<form action='' method="POST"> 
+    {% csrf_token %}
+    <input type="submit" value="Editar"|crispy></input>
+</form>
+{% endblock body %}
